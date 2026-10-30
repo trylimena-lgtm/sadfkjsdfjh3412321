@@ -1,0 +1,16 @@
+const pds294=0;IsFeatureEnabled("LinkingDiscord").then(async function(d){if(!d||!await GetIsOver18())return;const[u,r]=await RequestFunc(WebServerEndpoints.SocialNetwork+"user/"+GetTargetId(),"GET");!u||r.length===0||(ChildAdded(await WaitForTag("body"),!1,async function(o){if(!o.classList?.contains("foundation-web-dialog-overlay"))return;const l=await GetRobloxLocalization("Feature.Profile","Heading.SocialLinks");if(!l)return;const a=o.getElementsByClassName("flex-col")[0];if(a)for(const e of a.children){const s=e.getElementsByClassName("group-description-dialog-body-header")[0];if(!s||s.innerText!==l)continue;let t=e.getElementsByClassName("flex-row")[0];if(!t){const n=e.getElementsByClassName("text-body-medium")[0];n&&(n.remove(),t=document.createElement("div"),t.className="gap-small flex flex-row",e.appendChild(t))}if(!t)return;for(const n of r){const i=document.createElement("div");i.className="foundation-web-button relative clip group/interactable focus-visible:outline-focus disabled:outline-none cursor-pointer relative flex items-center justify-center stroke-none padding-y-none select-none radius-medium text-label-small height-800 padding-x-small bg-action-subtle content-action-standard",i.style="cursor: pointer; text-decoration: none;",i.innerHTML=`
+                <div role="presentation" class="absolute inset-[0] transition-colors group-hover/interactable:bg-[var(--color-state-hover)] group-active/interactable:bg-[var(--color-state-press)] group-disabled/interactable:bg-none"></div>
+                <span class="padding-y-xsmall text-truncate-end text-no-wrap">
+                    <div class="items-center gap-xsmall flex">
+                        <span class="social-link-icon content-emphasis flex">
+                            <span role="presentation" class="grow-0 shrink-0 basis-auto icon icon-regular-${SanitizeString(n.Platform.toLowerCase())} size-[var(--icon-size-small)]">
+                            </span>
+                        </span>
+                        <span class="content-emphasis text-caption-medium social-label"></span>
+                    </div>
+                </span>`;const c=i.getElementsByClassName("social-label")[0];i.addEventListener("click",function(){navigator.clipboard.writeText(n.Username).then(async function(){c.innerText=LocaleTranslate("feature_social_networks_copy_to_clipboard"),await sleep(1e3),c.innerText=n.Username})}),c.innerText=n.Username,t.appendChild(i)}}}),setTimeout(async function(){const o=await WaitForClass("social-link-icon-list"),l=await WaitForTagPath(o,"ul");for(const a of r){const e=document.createElement("li");e.className="roqol-social-link",e.innerHTML=`
+            <div class="social-container">
+                <div class="background-fill ${SanitizeString(a.Platform.toLowerCase())}"></div>
+                <span class="social-link-icon ${SanitizeString(a.Platform)}"></span>
+                <span class="name-label">${SanitizeString(a.Username)}</span>
+            </div>`;const s=e.getElementsByClassName("name-label")[0];e.addEventListener("click",function(){navigator.clipboard.writeText(a.Username).then(async function(){s.innerText=LocaleTranslate("feature_social_networks_copy_to_clipboard"),await sleep(1e3),s.innerText=a.Username})}),l.appendChild(e)}},0))});

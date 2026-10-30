@@ -1,0 +1,1 @@
+const pds136=0;function ModifyURLForLocale(o){if(o.includes(".roblox.com/")&&!o.endsWith("roblox.com/*")&&(o.includes("*.roblox")||o.includes("www.roblox"))){const l=o.split(".roblox.com/");return[!0,l[0]+".roblox.com/*/"+l[1]]}return[!1,o]}
